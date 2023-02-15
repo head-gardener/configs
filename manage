@@ -9,11 +9,19 @@ function full_help {
 }
 
 function collect {
-  cp -v $DESTDIR$HOME/.bashrc .
+  cp -vL $DESTDIR$HOME/.bashrc home
+
+  cp -vLr $DESTDIR$HOME/.config/{i3,sway} config
 }
 
-function install {
-  install 411 .bashrc $DESTDIR$HOME -v
+# todo rewrite this as loops for simplicity and modifiability
+function _install {
+  install -m 744 home/.bashrc $DESTDIR$HOME/ -v
+
+  mkdir -pv .config/{i3,sway,sway/config.d}
+  install -m 644 config/i3/* $DESTDIR$HOME/.config/i3 -v
+  install -m 644 config/sway/* $DESTDIR$HOME/.config/sway -v
+  install -m 644 config/sway/config.d/* $DESTDIR$HOME/.config/sway/config.d -v
 }
 
 if [ "$#" -eq 0 ]; then
@@ -25,7 +33,7 @@ case "$1" in
   "collect") 
     collect;;
   "install") 
-    install;;
+    _install;;
   "help") 
     full_help;;
   *)
