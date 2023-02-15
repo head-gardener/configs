@@ -1,0 +1,33 @@
+#!/bin/bash
+
+function short_help {
+  printf "Usage: ./manage collect|install|help\n"
+}
+
+function full_help {
+  printf "Config repository helper script.\n\nUsage:\n\t./manage collect|install|help\n\nEnvironment:\n\tDESTDIR\tsystem root\n\tHOME\tuser home dir, relative to root\n"
+}
+
+function collect {
+  cp -v $DESTDIR$HOME/.bashrc .
+}
+
+function install {
+  install 411 .bashrc $DESTDIR$HOME -v
+}
+
+if [ "$#" -eq 0 ]; then
+  help
+  exit 0
+fi
+
+case "$1" in
+  "collect") 
+    collect;;
+  "install") 
+    install;;
+  "help") 
+    full_help;;
+  *)
+    short_help;;
+esac
