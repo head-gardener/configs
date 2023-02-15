@@ -1,2 +1,9 @@
+### Configs
 Varios config files, collected in one place for my convenience.
-See `manage help` for helper script usage. 
+
+### Management
+See `./manage help` for usage.
+
+### Directory structure
+- `home` goes to `$HOME`
+- `config` to `$HOME/.config/`
