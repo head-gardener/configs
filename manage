@@ -1,28 +1,45 @@
 #!/bin/bash
 
+CP_OPTS=${CP_OPTS:="-vuLr"}
+INSTALL_OPTS=${INSTALL_OPTS:="-vCbm"}
+MKDIR_OPTS=${MKDIR_OPTS:="-pv"}
+
 function short_help {
   printf "Usage: ./manage collect|install|help\n"
 }
 
 function full_help {
-  printf "Config repository helper script.\n\nUsage:\n\t./manage collect|install|help\n\nEnvironment:\n\tDESTDIR\tsystem root\n\tHOME\tuser home dir, relative to root\n"
+  printf "Config repository helper script.\n\nUsage:\n\t./manage collect|install|help\n\nEnvironment:\n\tDESTDIR\t\tsystem root\n\tHOME\t\tuser home dir, relative to root\n\tCP_OPTS\t\tcp options, default: -vuLr\n\tINSTALL_OPTS\tinstall options, default: -vCbm\n\tMKDIR_OPTS\tmkdir options, default: -pv\n"
 }
 
-function collect {
-  cp -vL $DESTDIR$HOME/.bashrc home
+function _collect {
+  mkdir $MKDIR_OPTS {home,config}
 
-  cp -vLr $DESTDIR$HOME/.config/{i3,sway} config
+  cp $CP_OPTS $DESTDIR$HOME/.bashrc home
+
+  cp $CP_OPTS $DESTDIR$HOME/.config/{i3,sway,sampler,girls} config
+
+  printf "Done\n"
 }
 
 # todo rewrite this as loops for simplicity and modifiability
 function _install {
-  install -m 744 home/.bashrc $DESTDIR$HOME/ -v
+  install $INSTALL_OPTS 744 home/.bashrc $DESTDIR$HOME/
 
-  mkdir -pv .config/{i3,sway,sway/config.d}
-  install -m 644 config/i3/* $DESTDIR$HOME/.config/i3 -v
-  install -m 644 config/sway/* $DESTDIR$HOME/.config/sway -v
-  install -m 644 config/sway/config.d/* $DESTDIR$HOME/.config/sway/config.d -v
+  mkdir $MKDIR_OPTS .config/{i3,sampler,girls,sway,sway/config.d}
+  install $INSTALL_OPTS 644 config/i3/* $DESTDIR$HOME/.config/i3
+  install $INSTALL_OPTS 644 config/girls/* $DESTDIR$HOME/.config/girls
+  install $INSTALL_OPTS 644 config/sampler/* $DESTDIR$HOME/.config/sampler
+  install $INSTALL_OPTS 644 config/sway/* $DESTDIR$HOME/.config/sway
+  install $INSTALL_OPTS 644 config/sway/config.d/* $DESTDIR$HOME/.config/sway/config.d
+  printf "Done\n"
 }
+
+# todo rewrite this check
+if [ "$0" != "./manage" ]; then
+  printf "Please run this script from the same folder.\n"
+  exit 1
+fi
 
 if [ "$#" -eq 0 ]; then
   help
@@ -31,7 +48,7 @@ fi
 
 case "$1" in
   "collect") 
-    collect;;
+    _collect;;
   "install") 
     _install;;
   "help") 

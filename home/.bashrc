@@ -2,7 +2,9 @@ alias ls="ls --color=auto"
 alias ip="ip --color=auto"
 alias swaylock="swaylock --image /home/mkultra/Wallpaper/4.jpg"
 alias pacman="pacman --color=auto"
+alias yay="yay --color=auto"
 alias sudo="doas"
+alias sampler="sampler -c ~/.config/sampler/default.yml"
 
 PS_COLOR_PRIMARY='5;217'
 PS_COLOR_SECONDARY='5;189'

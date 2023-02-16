@@ -1,0 +1,15 @@
+textboxes:
+  - title: df
+    position: [[0, 14], [40, 27]]
+    sample: df | tail +2
+  - title: w
+    position: [[40, 14], [40, 27]]
+    sample: w | tail +3
+  - title: Stats
+    position: [[0, 0], [36, 14]]
+    sample: printf "`uptime | cut -d" " -f2`  up \n`date`\n\e[1mStill raining in the
+        lab ⛆\e[0m"
+  - title: ""
+    position: [[37, 0], [43, 14]]
+    sample: cat ~/.config/girls/girl3
+    border: false
