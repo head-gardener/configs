@@ -17,7 +17,7 @@ function _collect {
 
   cp $CP_OPTS $DESTDIR$HOME/.bashrc home
 
-  cp $CP_OPTS $DESTDIR$HOME/.config/{i3,sway,sampler,girls} config
+  cp $CP_OPTS $DESTDIR$HOME/.config/{i3,sway,sampler,picom.conf,girls} config
 
   printf "Done\n"
 }
@@ -32,6 +32,7 @@ function _install {
   install $INSTALL_OPTS 644 config/sampler/* $DESTDIR$HOME/.config/sampler
   install $INSTALL_OPTS 644 config/sway/* $DESTDIR$HOME/.config/sway
   install $INSTALL_OPTS 644 config/sway/config.d/* $DESTDIR$HOME/.config/sway/config.d
+  install $INSTALL_OPTS 644 config/picom.conf $DESTDIR$HOME/.config/
   printf "Done\n"
 }
 

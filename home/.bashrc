@@ -5,6 +5,9 @@ alias pacman="pacman --color=auto"
 alias yay="yay --color=auto"
 alias sudo="doas"
 alias sampler="sampler -c ~/.config/sampler/default.yml"
+alias sleep_mem="echo mem | doas tee /sys/power/state"
+alias sleep_disk="echo disk | doas tee /sys/power/state"
+alias sleep_freeze="echo freeze | doas tee /sys/power/state"
 
 PS_COLOR_PRIMARY='5;217'
 PS_COLOR_SECONDARY='5;189'
