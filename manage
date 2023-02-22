@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CP_OPTS=${CP_OPTS:="-vuLr"}
+CP_OPTS=${CP_OPTS:="-vuLrp"}
 INSTALL_OPTS=${INSTALL_OPTS:="-vCbm"}
 MKDIR_OPTS=${MKDIR_OPTS:="-pv"}
 
@@ -17,7 +17,7 @@ function _collect {
 
   cp $CP_OPTS $DESTDIR$HOME/.bashrc home
 
-  cp $CP_OPTS $DESTDIR$HOME/.config/{i3,sway,sampler,picom.conf,girls} config
+  cp $CP_OPTS $DESTDIR$HOME/.config/{i3,sway,sampler,picom.conf,girls,fish} config
 
   printf "Done\n"
 }
@@ -33,6 +33,7 @@ function _install {
   install $INSTALL_OPTS 644 config/sway/* $DESTDIR$HOME/.config/sway
   install $INSTALL_OPTS 644 config/sway/config.d/* $DESTDIR$HOME/.config/sway/config.d
   install $INSTALL_OPTS 644 config/picom.conf $DESTDIR$HOME/.config/
+  cp $CP_OPTS config/fish $DESTDIR$HOME/.config/
   printf "Done\n"
 }
 
